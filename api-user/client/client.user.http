@@ -1,0 +1,45 @@
+POST http://localhost:3500/api/usuario
+#Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzM4ZWNhODZjM2VlMTFhNWU2ODNhNWEiLCJjb3JyZW8iOiJyb2Npby5kb21pbmd1ZXpAYWRtaW4uY29tIiwiaWF0IjoxNjY0NjgyMzgxLCJleHAiOjE2NjQ2ODU5ODF9.aSkpx_uruMcCu-cIHo_w5d4qEJVTzHYSODQU7ZtRwyI
+Content-Type: application/json
+
+{
+    "nombre": "Alba",
+    "apellido": "Dominguez",
+    "correo": "ita@correo.do",
+    "clave": "ita123",
+    "confirmaClave": "ita123"
+}
+
+
+###
+GET http://localhost:3500/api/usuario
+#Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzM4ZWNhODZjM2VlMTFhNWU2ODNhNWEiLCJjb3JyZW8iOiJyb2Npby5kb21pbmd1ZXpAYWRtaW4uY29tIiwiaWF0IjoxNjY0NjgyMzgxLCJleHAiOjE2NjQ2ODU5ODF9.aSkpx_uruMcCu-cIHo_w5d4qEJVTzHYSODQU7ZtRwyI
+
+###
+PUT http://localhost:3500/api/usuario/633f7db7cd22a5e2fc62093e
+Content-Type: application/json
+
+{
+    "correo": "pita@correo.do"
+}
+
+###
+DELETE http://localhost:3500/api/usuario/63378a1e49a8df6df58e9927
+
+###
+POST http://localhost:3500/api/usuario/login
+Content-Type: application/json
+
+{
+    "correo" : "pita@correo.do",
+    "clave" : "ita123"
+}
+
+###
+PUT http://localhost:3500/api/usuario/changePassword/633f612898b4724701c1fe6f
+Content-Type: application/json
+
+{
+    "oldPassword": "ita123",
+    "newPassword": "Pita123"
+}
