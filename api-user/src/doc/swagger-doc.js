@@ -1,9 +1,7 @@
-import * as ctrUser from "../controllers/user.controller.js";
-import { Router } from "express";
-import autorizarAdmin from "../auth/auth.admin.js";
 
-const routerUser = Router();
+//Documentacion E-commerce Api User
 
+//Schemas
 /**
  * @swagger
  * components:
@@ -104,6 +102,7 @@ const routerUser = Router();
  *        newPassword: FranPerez123
  */
 
+//Post create a new user
 /**
  * @swagger
  * /api/usuario:
@@ -121,8 +120,8 @@ const routerUser = Router();
  *      200:
  *        description: new user created!
  */
-routerUser.post("/", ctrUser.crearCuenta);
 
+//Get return all users
 /**
  * @swagger
  * /api/usuario:
@@ -139,8 +138,8 @@ routerUser.post("/", ctrUser.crearCuenta);
  *              items:
  *                $ref: '#/components/schemas/User'
  */
-routerUser.get("/", ctrUser.obtenerCuenta);
 
+//Put update name, surname and/or email of one user
 /**
  * @swagger
  * /api/usuario/{id}:
@@ -172,8 +171,8 @@ routerUser.get("/", ctrUser.obtenerCuenta);
  *      404:
  *        description: user not found
  */
-routerUser.put("/:id", ctrUser.actualizarCuenta);
 
+//Delete a user
 /**
  * @swagger
  * /api/usuario/deleteAccount/{id}:
@@ -193,8 +192,8 @@ routerUser.put("/:id", ctrUser.actualizarCuenta);
  *      404:
  *        description: user not found
  */
-routerUser.delete("/deleteAccount/:id", ctrUser.eliminarCuenta);
 
+//Post LogIn
 /**
  * @swagger
  * /api/usuario/login:
@@ -212,8 +211,8 @@ routerUser.delete("/deleteAccount/:id", ctrUser.eliminarCuenta);
  *      200:
  *        description: successful LogIn!
  */
-routerUser.post("/login", ctrUser.login);
 
+//Put Change Passsword
 /**
  * @swagger
  * /api/usuario/changePassword/{id}:
@@ -240,6 +239,3 @@ routerUser.post("/login", ctrUser.login);
  *      404:
  *        description: user not found
  */
-routerUser.put("/changePassword/:id", ctrUser.actualizarContraseña);
-
-export default routerUser;

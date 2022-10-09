@@ -20,7 +20,7 @@ PUT http://localhost:3500/api/usuario/633f7db7cd22a5e2fc62093e
 Content-Type: application/json
 
 {
-    "correo": "pita@correo.do"
+    "clave": "Pita"
 }
 
 ###
@@ -31,8 +31,8 @@ POST http://localhost:3500/api/usuario/login
 Content-Type: application/json
 
 {
-    "correo" : "pita@correo.do",
-    "clave" : "ita123"
+    "correo" : "pita01@correo.do",
+    "clave" : "Pita123"
 }
 
 ###

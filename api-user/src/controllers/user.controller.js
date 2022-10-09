@@ -40,11 +40,11 @@ export async function obtenerCuenta (req, res) {
 export async function actualizarCuenta (req, res) {
     try {
         const id = req.params.id;
-        const data = req.body;
+        const { nombre, apellido, correo } = req.body;
 
-        if (id && data) {
+        if (id) {
             //Buscar data de usuario por id
-            await userModel.findByIdAndUpdate(id, data);
+            await userModel.updateOne({ _id: id }, { $set: { nombre, apellido, correo } });
             res.json({isOk: true, msj: "Registro actualizado de forma satisfactoria"});
         } else {
             res.json({isOk: false, msj: "Datos insuficientes"});
