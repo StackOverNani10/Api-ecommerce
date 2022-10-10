@@ -17,6 +17,7 @@
  *          description: the user surname
  *        correo:
  *          type: string
+ *          format: email
  *          description: the user email
  *        clave:
  *          type: string
@@ -53,6 +54,7 @@
  *          description: the user new surname
  *        correo:
  *          type: string
+ *          format: email
  *          description: the user new email
  *      example:
  *        nombre: Fran Ana 
@@ -69,6 +71,7 @@
  *      properties:
  *        correo:
  *          type: string
+ *          format: email
  *          description: the user email
  *        clave:
  *          type: string
