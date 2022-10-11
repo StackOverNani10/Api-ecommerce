@@ -268,8 +268,9 @@
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              $ref: '#/components/Schemes/User'
+ *              type: array
+ *              items:
+ *                $ref: '#/components/schemas/User'
  *      404:
  *        description: user not found
  */
