@@ -3,8 +3,7 @@ POST http://localhost:3500/api/usuario
 Content-Type: application/json
 
 {
-    "nombre": "Alba",
-    "apellido": "Dominguez",
+    "nombreCompleto": "Alba Dominguez",
     "correo": "ita@correo.do",
     "clave": "ita123",
     "confirmaClave": "ita123"
@@ -20,7 +19,7 @@ PUT http://localhost:3500/api/usuario/633f7db7cd22a5e2fc62093e
 Content-Type: application/json
 
 {
-    "clave": "Pita"
+    "correo": "Pita@correo.do"
 }
 
 ###

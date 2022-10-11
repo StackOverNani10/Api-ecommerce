@@ -9,12 +9,9 @@
  *    User: 
  *      type: object
  *      properties:
- *        nombre:
+ *        nombreCompleto:
  *          type: string
- *          description: the user name  
- *        apellido:
- *          type: string
- *          description: the user surname
+ *          description: the user fullname
  *        correo:
  *          type: string
  *          format: email
@@ -26,14 +23,12 @@
  *          type: string
  *          description: the user password confirmation
  *      required:
- *        - nombre
- *        - apellido
+ *        - nombreCompleto
  *        - correo
  *        - clave
  *        - confirmaClave
  *      example:
- *        nombre: Fran
- *        apellido: Perez Hernan
+ *        nombreCompleto: Fran Perez Hernan
  *        correo: FranPerez@email.com
  *        clave: Fran123
  *        confirmaClave: Fran123
@@ -46,19 +41,15 @@
  *    Update User: 
  *      type: object
  *      properties:
- *        nombre:
+ *        nombreCompleto:
  *          type: string
- *          description: the user new name  
- *        apellido:
- *          type: string
- *          description: the user new surname
+ *          description: the user new fullname
  *        correo:
  *          type: string
  *          format: email
  *          description: the user new email
  *      example:
- *        nombre: Fran Ana 
- *        apellido: Pérez Hernan
+ *        nombreCompleto: Fran Ana Pérez Hernan
  *        correo: FranAPerez@email.com
  */
 
@@ -152,12 +143,12 @@
  *                $ref: '#/components/schemas/User'
  */
 
-//Put update name, surname and/or email of one user
+//Put update fullname and/or email of one user
 /**
  * @swagger
  * /api/usuario/{id}:
  *  put:
- *    summary: update name, surname and/or email of one user 
+ *    summary: update fullname and/or email of one user 
  *    tags: [Update User]
  *    parameters:
  *      - in: path

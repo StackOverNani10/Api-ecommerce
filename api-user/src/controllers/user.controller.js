@@ -21,18 +21,18 @@ schema
 export async function crearCuenta (req, res) {
 
     try {
-        const { nombre, apellido, correo, clave, confirmaClave } = req.body;
+        const { nombreCompleto, correo, clave, confirmaClave } = req.body;
         var validEmail = emailRegex({exact: true}).test(correo); // Validar correo con expresiones regulares 
         var validPassword = schema.validate(clave); // Validar clave con expresiones regulares
         let errors = schema.validate(clave, { details: true }); // Listas de errores de la clave
-        if (nombre && apellido && correo && clave && confirmaClave) {
+        if (nombreCompleto && correo && clave && confirmaClave) {
             if (clave == confirmaClave) {
                 // Encriptar la clave
                 const hashed = await bcrypt.hash (clave, saltRounds);
     
                 //Creacion de usuario
                 if (validEmail && validPassword) {
-                    const newUser = new userModel({ nombre, apellido, correo, clave: hashed });
+                    const newUser = new userModel({ nombreCompleto, correo, clave: hashed });
                     await newUser.save();
     
                     res.status(201).json({ isOk: true, msj: `Usuario ${correo} almacenado de forma satisfactoria`, id: newUser._id });
@@ -64,14 +64,14 @@ export async function obtenerCuenta (req, res) {
 export async function actualizarCuenta (req, res) {
     try {
         const id = req.params.id;
-        const { nombre, apellido, correo } = req.body;
+        const { nombreCompleto, correo } = req.body;
 
         if (id) {
             //Buscar data de usuario por id
-            await userModel.updateOne({ _id: id }, { $set: { nombre, apellido, correo } });
+            await userModel.updateOne({ _id: id }, { $set: { nombreCompleto, correo } });
             res.status(200).json({isOk: true, msj: "Registro actualizado de forma satisfactoria"});
         } else {
-            res.status(400).json({isOk: false, msj: "Datos insuficientes"});
+            res.status(404).json({isOk: false, msj: "Usuario no encontrado"});
         } 
     } catch (error) {
         res.status(500).json({ error: error.message });

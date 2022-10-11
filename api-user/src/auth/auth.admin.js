@@ -5,7 +5,7 @@ const autorizarAdmin = async (req, res, next) => {
     const strToken = req.headers.authorization;
 
     if (!strToken) {
-        return res.json({msj: "No se encontró el Token"});
+        return res.status(404).json({msj: "No se encontró el Token"});
     }
     try {
         const token = strToken.split(" ")[1];
@@ -13,11 +13,11 @@ const autorizarAdmin = async (req, res, next) => {
         const admin = await adminModel.findById(llave._id);
 
         if (!admin) {
-            return res.json({msj: "Usuario no encontrado"});
+            return res.status(404).json({msj: "Usuario no encontrado"});
         }
 
     } catch (error) {
-        return res.json({error});
+        return res.json({error: error.message});
     }
 
     next();
