@@ -261,8 +261,8 @@
  *    summary: return the user by token
  *    tags: [Verify Token]
  *    parameters:
- *      - in: headers
- *        name: authorization
+ *      - in: header
+ *        name: Authorization
  *        schema:
  *          type: string
  *        required: true
