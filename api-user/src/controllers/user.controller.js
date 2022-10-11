@@ -2,43 +2,50 @@ import bcrypt from "bcrypt";
 import userModel from "../models/User.js";
 import jwt from "jsonwebtoken";
 import emailRegex from 'email-regex';
-import passwordRegexp from 'password-regexp';
+import passwordValidator from 'password-validator';
 const saltRounds = 10; //cantidad de veces que realiza la encriptacion
 
-const customRegexp = passwordRegexp({
-  min: 8,
-  max: 18,
-  numeric: true,
-  uppercase: true,
-  symbols: true, // an option for symbols: ! @ # $ % ^ &
-});
+// Create a schema
+var schema = new passwordValidator();
+
+// Add properties to it
+schema
+.is().min(8)                                    // Minimum length 8
+.is().max(30)                                  // Maximum length 100
+.has().uppercase()                              // Must have uppercase letters
+.has().lowercase()                              // Must have lowercase letters
+.has().digits(1)                                // Must have at least 2 digits
+.has().not().spaces()                           // Should not have spaces
+.is().not().oneOf(['Passw0rd', 'Password123']); // Blacklist these values
+
 export async function crearCuenta (req, res) {
 
     try {
         const { nombre, apellido, correo, clave, confirmaClave } = req.body;
-        var validEmail = emailRegex({exact: true}).test(correo);
-        var validPassword = customRegexp.test(clave);
-        //if (validEmail && validPassword) {
+        var validEmail = emailRegex({exact: true}).test(correo); // Validar correo con expresiones regulares 
+        var validPassword = schema.validate(clave); // Validar clave con expresiones regulares
+        let errors = schema.validate(clave, { details: true }); // Listas de errores de la clave
+        if (nombre && apellido && correo && clave && confirmaClave) {
             if (clave == confirmaClave) {
                 // Encriptar la clave
                 const hashed = await bcrypt.hash (clave, saltRounds);
     
                 //Creacion de usuario
-                if (nombre && apellido && correo && clave && confirmaClave) {
+                if (validEmail && validPassword) {
                     const newUser = new userModel({ nombre, apellido, correo, clave: hashed });
                     await newUser.save();
     
                     res.status(201).json({ isOk: true, msj: `Usuario ${correo} almacenado de forma satisfactoria`, id: newUser._id });
                 } else {
-                    res.status(400).json({ isOk: false, msj: "Faltan datos requeridos" });
+                    res.status(400).json({ isOk: false, msj: "Ingrese datos validos", errors});
                 }
             } else {
                 //Envia msg de error
-                res.status(400).json({isOk: false, msj: "La contraseña y su confirmación no coinciden"});
+                res.status(400).json({ isOk: false, msj: "La contraseña y su confirmación no coinciden" });
             }
-        //} else {
-        //    res.status(400).json({ isOk: false, msj: "Ingrese datos validos" });
-        //}
+        } else {
+            res.status(400).json({ isOk: false, msj: "Faltan datos requeridos" });
+        }
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
