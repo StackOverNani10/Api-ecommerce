@@ -13,15 +13,18 @@ export async function crearCuenta (req, res) {
             const hashed = await bcrypt.hash (clave, saltRounds);
 
             //Creacion de usuario
-            const newUser = new userModel({nombre, apellido, correo, clave: hashed});
-            await newUser.save();
+            if (nombre && apellido && correo && clave && confirmaClave) {
+                const newUser = new userModel({ nombre, apellido, correo, clave: hashed });
+                await newUser.save();
 
-            res.json({isOk: true, msj: "Usuario almacenado de forma satisfactoria", id: newUser._id})
+                res.json({ isOk: true, msj: "Usuario almacenado de forma satisfactoria", id: newUser._id });
+            } else {
+                res.json({ isOk: false, msj: "Faltan datos requeridos" });
+            }
         } else {
             //Envia msg de error
-            res.json({isOk: false, msj: "La contraseña y su confirmación no coinciden"})
+            res.json({isOk: false, msj: "La contraseña y su confirmación no coinciden"});
         }
-
     } catch (error) {
         res.json(error);
     }
@@ -49,7 +52,6 @@ export async function actualizarCuenta (req, res) {
         } else {
             res.json({isOk: false, msj: "Datos insuficientes"});
         } 
-
     } catch (error) {
         res.json(error);
     } 
@@ -71,17 +73,18 @@ export async function login (req, res) {
         const { correo, clave } = req.body;
 
         if (correo && clave) {
+            // Encontrar usuario por correo insertado
             const user = await userModel.findOne({correo}); 
             if (!user) {
                 res.json({isOk: false, token: null, msj: "Usuario o contraseña incorrectos"});
             } else {
-                const match = await bcrypt.compare(clave, user.clave);
+                const match = await bcrypt.compare(clave, user.clave); // Comparamos la clave insertada con la almacenada
                 if (match) {
                     const {_id, correo} = user;
                     const option = {
                         expiresIn: '1h'
                     }
-                    const token = jwt.sign({_id, correo}, process.env.JWT_SECRET, option);
+                    const token = jwt.sign({_id, correo}, process.env.JWT_SECRET, option); // Creamo el token
                     res.json({isOk: true, token, msj: "Usuario loggeado de manera satisfactoria"});
                 } else {
                     //no coincide la clave
@@ -92,7 +95,7 @@ export async function login (req, res) {
             res.json({isOk: false, error: "Faltan datos requeridos"});
         }
     } catch (error) {
-        res.json({error: "gg"});
+        res.json(error);
     }
 };
 
@@ -104,28 +107,27 @@ export async function actualizarContraseña (req, res) {
         if (id && oldPassword && newPassword) {
             //Buscar usuario por id
             const user = await userModel.findOne({id});
-            // Comparando la contraseña introducida por la almacenada
+            // Comparamos la clave insertada con la almacenada
             const match = await bcrypt.compare(oldPassword, user.clave);
             if (!match) {
                 res.json({isOk: false, msj: "Check your old password"});
             } else {
                 // Encriptar la clave
                 const hashedPassword = await bcrypt.hash (newPassword, saltRounds);
-
+                // Cambiamos la clave antigua por la nueva
                 await userModel.findOneAndUpdate({clave: hashedPassword});
                 res.json({isOk: true, msj: "Contraseña actualizada de forma satisfactoria"});
             }
         } else {
             res.json({isOk: false, msj: "Datos insuficientes"});
         } 
-
     } catch (error) {
         res.json(error);
     } 
 };
 
 export async function verificarToken (req, res) {
-    
+    // Consultar token en el header
     const strToken = req.headers.authorization;
 
     if (!strToken) {
@@ -133,14 +135,13 @@ export async function verificarToken (req, res) {
     }
 
     try {
-        const token = strToken.split(" ")[1];
-        const llave = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await userModel.findById(llave._id); //Buscar usuario de acuerdo al id recibido en el token
+        const token = strToken.split(" ")[1];// Separar palabra bearer del token
+        const llave = jwt.verify(token, process.env.JWT_SECRET); // Verificar autentizidad del token
+        const user = await userModel.findById(llave._id); // Buscar usuario de acuerdo al id recibido en el token
 
         if (!user) {
             return res.json({msj: "Usuario no encontrado"});
         }
-        
         res.json(user);
     } catch (error) {
         res.json(error);
