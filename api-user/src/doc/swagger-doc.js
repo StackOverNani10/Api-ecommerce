@@ -105,6 +105,20 @@
  *        newPassword: FranPerez123
  */
 
+/**
+ * @swagger
+ * components:
+ *  securitySchemes:
+ *    Verify Token: 
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
+ *      required:
+ *        - strToken
+ *      example:
+ *        strToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ0MzM5Y2NmYWMyZTBmOGY2ODIxNTEiLCJjb3JyZW8iOiJGcmFuUGVyZXpAZW1haWwuY29tIiwiaWF0IjoxNjY1NDU2MDk5LCJleHAiOjE2NjU0NTk2OTl9.MsfVh89dLgx8UqgX-bNfitIyGej21eX4c0sTv3G7Vf0
+ */
+
 //Post create a new user
 /**
  * @swagger
@@ -239,6 +253,32 @@
  *    responses:
  *      200:
  *        description: successful password update! 
+ *      404:
+ *        description: user not found
+ */
+
+//Get user by token
+/**
+ * @swagger
+ * /api/usuario/verify:
+ *  get:
+ *    summary: return the user by token
+ *    tags: [Verify Token]
+ *    parameters:
+ *      - in: header
+ *        name: Token
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: the user token
+ *    responses:
+ *      200:
+ *        description: user authenticate
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              $ref: '#/components/securitySchemes/Verify Token'
  *      404:
  *        description: user not found
  */

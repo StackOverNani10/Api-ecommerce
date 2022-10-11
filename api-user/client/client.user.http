@@ -13,7 +13,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3500/api/usuario
-#Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzM4ZWNhODZjM2VlMTFhNWU2ODNhNWEiLCJjb3JyZW8iOiJyb2Npby5kb21pbmd1ZXpAYWRtaW4uY29tIiwiaWF0IjoxNjY0NjgyMzgxLCJleHAiOjE2NjQ2ODU5ODF9.aSkpx_uruMcCu-cIHo_w5d4qEJVTzHYSODQU7ZtRwyI
+#Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ0YzM4MGIwMGZjMjFkNDM0MDIwYWMiLCJjb3JyZW8iOiJyb2Npby5kb21pbmd1ZXpAYWRtaW4uY29tIiwiaWF0IjoxNjY1NDUwODg1LCJleHAiOjE2NjU0NTQ0ODV9.MmroblBNClLiSIrGJNZPPqrrLZJp_I502MdlFUsbZy4
 
 ###
 PUT http://localhost:3500/api/usuario/633f7db7cd22a5e2fc62093e
@@ -43,3 +43,7 @@ Content-Type: application/json
     "oldPassword": "ita123",
     "newPassword": "Pita123"
 }
+
+###
+GET http://localhost:3500/api/usuario/verify
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzNmN2RiN2NkMjJhNWUyZmM2MjA5M2UiLCJjb3JyZW8iOiJwaXRhMDFAY29ycmVvLmRvIiwiaWF0IjoxNjY1NDU0ODQ2LCJleHAiOjE2NjU0NTg0NDZ9.WRAxGr9N8uzQHaNi_alDWVP0NL0Xp4fuaMqeJad1h4g

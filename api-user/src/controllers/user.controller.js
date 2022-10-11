@@ -123,3 +123,26 @@ export async function actualizarContraseña (req, res) {
         res.json(error);
     } 
 };
+
+export async function verificarToken (req, res) {
+    
+    const strToken = req.headers.authorization;
+
+    if (!strToken) {
+        return res.json({msj: "No se encontró el Token"});
+    }
+
+    try {
+        const token = strToken.split(" ")[1];
+        const llave = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await userModel.findById(llave._id); //Buscar usuario de acuerdo al id recibido en el token
+
+        if (!user) {
+            return res.json({msj: "Usuario no encontrado"});
+        }
+        
+        res.json(user);
+    } catch (error) {
+        res.json(error);
+    }
+};

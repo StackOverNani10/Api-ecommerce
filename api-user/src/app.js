@@ -30,7 +30,7 @@ const swaggerSpec = {
             },
         ],
     },
-    apis: [`${path.join(__dirname, "./routes/*.js")}`],
+    apis: [`${path.join(__dirname, "./doc/swagger-doc.js")}`],
 };
 
 //settings
