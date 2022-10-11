@@ -267,7 +267,7 @@
  *          application/json:
  *            schema:
  *              type: object
- *              $ref: '#/components/Schemes/Verify Token'
+ *              $ref: '#/components/Schemes/User'
  *      404:
  *        description: user not found
  */
