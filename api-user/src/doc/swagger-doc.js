@@ -260,15 +260,6 @@
  *  get:
  *    summary: return the user by token
  *    tags: [Verify Token]
- *    parameters:
- *      - in: header
- *        name: Token
- *        Authorization:
- *          schema:
- *              type: string
- *              $ref: '#/components/Schemes/Verify Token'
- *          required: true
- *          description: the user token
  *    responses:
  *      200:
  *        description: user authenticate
@@ -276,7 +267,7 @@
  *          application/json:
  *            schema:
  *              type: object
- *              $ref: '#/components/Schemes/User'
+ *              $ref: '#/components/Schemes/Verify Token'
  *      404:
  *        description: user not found
  */
