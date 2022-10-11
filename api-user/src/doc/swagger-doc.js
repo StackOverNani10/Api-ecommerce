@@ -262,7 +262,7 @@
  *    tags: [Verify Token]
  *    parameters:
  *      - in: header
- *        name: strToken
+ *        name: Authorization
  *        schema:
  *          type: string
  *          required: true
