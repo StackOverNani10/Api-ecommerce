@@ -263,11 +263,6 @@
  *    responses:
  *      200:
  *        description: user authenticate
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              $ref: '#/components/Schemes/User'
  *      404:
  *        description: user not found
  */
