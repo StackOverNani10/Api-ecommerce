@@ -262,11 +262,11 @@
  *    tags: [Verify Token]
  *    parameters:
  *      - in: header
- *        name: Token
+ *        name: strToken
  *        schema:
  *          type: string
- *        required: true
- *        description: the user token
+ *          required: true
+ *          description: the user token
  *    responses:
  *      200:
  *        description: user authenticate
