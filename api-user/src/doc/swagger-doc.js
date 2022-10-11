@@ -113,10 +113,6 @@
  *      type: http
  *      scheme: bearer
  *      bearerFormat: JWT
- *      required:
- *        - strToken
- *      example:
- *        strToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ0MzM5Y2NmYWMyZTBmOGY2ODIxNTEiLCJjb3JyZW8iOiJGcmFuUGVyZXpAZW1haWwuY29tIiwiaWF0IjoxNjY1NDU2MDk5LCJleHAiOjE2NjU0NTk2OTl9.MsfVh89dLgx8UqgX-bNfitIyGej21eX4c0sTv3G7Vf0
  */
 
 //Post create a new user
@@ -278,7 +274,7 @@
  *          application/json:
  *            schema:
  *              type: object
- *              $ref: '#/components/securitySchemes/Verify Token'
+ *              $ref: '#/components/Schemes/User'
  *      404:
  *        description: user not found
  */
