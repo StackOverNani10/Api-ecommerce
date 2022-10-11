@@ -260,13 +260,6 @@
  *  get:
  *    summary: return the user by token
  *    tags: [Verify Token]
- *    parameters:
- *      - in: header
- *        name: Authorization
- *        schema:
- *          type: string
- *        required: true
- *        description: the user token
  *    responses:
  *      200:
  *        description: user authenticate
