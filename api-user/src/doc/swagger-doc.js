@@ -113,6 +113,8 @@
  *      type: http
  *      scheme: bearer
  *      bearerFormat: JWT
+ * security:
+ *  bearerAuth: []
  */
 
 //Post create a new user
@@ -260,9 +262,21 @@
  *  get:
  *    summary: return the user by token
  *    tags: [Verify Token]
+ *    parameters:
+ *      - in: header
+ *        name: Authorization
+ *        schema:
+ *          type: string
+ *          required: true
+ *          description: the user token
  *    responses:
  *      200:
  *        description: user authenticate
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              $ref: '#/components/Schemes/User'
  *      404:
  *        description: user not found
  */
