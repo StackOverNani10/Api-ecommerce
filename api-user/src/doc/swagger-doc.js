@@ -30,8 +30,8 @@
  *      example:
  *        nombreCompleto: Fran Perez Hernan
  *        correo: FranPerez@email.com
- *        clave: Fran123
- *        confirmaClave: Fran123
+ *        clave: Fran1234
+ *        confirmaClave: Fran1234
  */
 
 /**
@@ -72,7 +72,7 @@
  *        - clave
  *      example:
  *        correo: FranAPerez@email.com
- *        clave: Fran123
+ *        clave: Fran1234
  */
 
 /**
@@ -92,8 +92,8 @@
  *        - oldPassword
  *        - newPassword
  *      example:
- *        oldPassword: Fran123
- *        newPassword: FranPerez123
+ *        oldPassword: Fran1234
+ *        newPassword: FranPerez1234
  */
 
 /**
