@@ -31,7 +31,7 @@ export async function crearCuenta (req, res) {
                 const hashed = await bcrypt.hash (clave, saltRounds);
     
                 //Creacion de usuario
-                if (validEmail && validPassword) {
+                if (validEmail /*&& validPassword*/) {
                     const newUser = new userModel({ nombreCompleto, correo, clave: hashed });
                     await newUser.save();
     
