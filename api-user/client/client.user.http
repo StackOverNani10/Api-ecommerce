@@ -3,10 +3,10 @@ POST http://localhost:3500/api/usuario
 Content-Type: application/json
 
 {
-    "nombreCompleto": "Alba Dominguez",
-    "correo": "ita@correo.do",
-    "clave": "ita123",
-    "confirmaClave": "ita123"
+    "nombreCompleto": "Alba r Dominguez",
+    "correo": "rita@correo.do",
+    "clave": "Rita1234",
+    "confirmaClave": "Rita1234"
 }
 
 

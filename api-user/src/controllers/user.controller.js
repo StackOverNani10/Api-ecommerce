@@ -34,8 +34,20 @@ export async function crearCuenta (req, res) {
                 if (validEmail /*&& validPassword*/) {
                     const newUser = new userModel({ nombreCompleto, correo, clave: hashed });
                     await newUser.save();
-    
-                    res.status(201).json({ isOk: true, msj: `Usuario ${correo} almacenado de forma satisfactoria`, id: newUser._id });
+/*
+-------------------------------------------------------------------------------------------Este codigo es temporal
+*/
+                    const {_id} = newUser;
+                    const option = {
+                        expiresIn: '1h'
+                    }
+                    const token = jwt.sign({_id}, process.env.JWT_SECRET, option); // Creamo el token
+                    
+/*
+--------------------------------------------------------------------------------------------Este codigo es temporal
+*/
+
+                    res.status(201).json({ isOk: true, msj: `Usuario ${correo} almacenado de forma satisfactoria`, token, id: newUser._id });
                 } else {
                     res.status(400).json({ isOk: false, msj: "Ingrese datos validos", errors});
                 }
