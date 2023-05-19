@@ -26,7 +26,7 @@ const swaggerSpec = {
         },
         servers: [
             {
-                url: "https://outstanding-duck-trousers.cyclic.app",
+                url: "https://git.heroku.com/api-user-ecommerce.git",
             },
         ],
     },
